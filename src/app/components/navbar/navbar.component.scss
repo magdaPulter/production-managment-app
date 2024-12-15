@@ -1,0 +1,37 @@
+@import "../../styles/config";
+
+.nav {
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  background-color: $color-primary;
+  height: 66px;
+  .list {
+    display: flex;
+    color: $white;
+    font-size: 24px;
+    line-height: 19px;
+    font-family: $main-font;
+    display: flex;
+    gap: 90px;
+    align-items: center;
+    position: absolute;
+    left: 50px;
+    top: 20px;
+
+    .list-item {
+      list-style: none;
+
+      a {
+        cursor: pointer;
+        text-decoration: none;
+      }
+      a:hover,
+      a:active,
+      a:visited {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+}
