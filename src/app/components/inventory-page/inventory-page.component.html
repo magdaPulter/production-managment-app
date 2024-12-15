@@ -1,0 +1,16 @@
+@for(inv of inventory$ | async; track inv) {
+<p>{{inv.name}} <button (click)="onDelete(inv)">Delete</button></p>
+}
+<form (submit)="onSubmit()">
+    <mat-form-field>
+        <mat-label>First name</mat-label>
+        <input matInput #first [(ngModel)]="inventory.name" name="name" type="text">
+
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Last name</mat-label>
+        <input matInput #last [(ngModel)]="inventory.weight" name="weight" type="number">
+
+    </mat-form-field>
+    <button mat-raised-button>Submit</button>
+</form>
