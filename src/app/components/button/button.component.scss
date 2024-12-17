@@ -1,0 +1,15 @@
+@import "../../styles/config";
+
+button {
+  background-color: $color-primary;
+  color: $white;
+  border: none;
+  padding: 10px;
+  border-radius: 15px;
+  font-size: 18px;
+  width: 100%;
+}
+
+button[disabled] {
+  background-color: $color-secondary;
+}

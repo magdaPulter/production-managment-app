@@ -5,6 +5,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environment/environment.prod';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,6 +13,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom([
       AngularFirestoreModule,
       AngularFireModule.initializeApp(environment.firebaseConfig),
-    ]),
+    ]), provideAnimationsAsync(),
   ],
 };

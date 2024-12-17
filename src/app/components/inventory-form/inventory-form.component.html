@@ -1,0 +1,21 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="form-field">
+        <label for="name">Title</label>
+        <input type="text" [(ngModel)]="inventory.name" name="name" name="name" id="name" required #name=ngModel>
+        @if((name.dirty || name.touched) && inventory.name === ''){
+        <small class="error">Title is obligastory</small>
+        }
+    </div>
+    <div class="form-field">
+        <label for="weight">Weight</label>
+        <input type="number" [(ngModel)]="inventory.weight" name="weight" id="weight" required [min]="1"
+            #weight=ngModel>
+        @if(inventory.weight < 1 && weight.touched){ <small class="error">weight should be a number higher than
+            1</small>
+            }
+    </div>
+    <div class="submit">
+        <app-button [label]="'Submit'" [type]="'submit'" [isDisabled]="form.invalid"
+            [attr.data-bs-dismiss]="form.invalid ? null : 'modal'"></app-button>
+    </div>
+</form>

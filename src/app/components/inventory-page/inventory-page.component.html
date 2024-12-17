@@ -1,0 +1,35 @@
+<div class="main-content">
+    <div class="top">
+        <h1>Inventory</h1>
+        <app-button [label]="'Add new Inventory'" [type]="'button'" data-bs-toggle="modal"
+            data-bs-target="#addNewModal"></app-button>
+    </div>
+
+    <app-modal [id]="'addNewModal'">
+        <app-inventory-form form [inventory]="inventory()" (onFormSubmitted)="createInventory($event)">
+            <h1>Add new Inventory</h1>
+        </app-inventory-form>
+    </app-modal>
+
+    <app-modal [id]="'editModal'">
+        <app-inventory-form form [inventory]="selectedInventory()" (onFormSubmitted)="editInventory($event)">
+            <h1>Edit Inventory</h1>
+        </app-inventory-form>
+    </app-modal>
+    <app-modal [id]="'deleteModal'">
+        <div class="modal-delete">
+            <h3>Are you sure, you want to delete the inventory?</h3>
+            <div class="buttons">
+                <app-button [label]="'Yes'" (click)="onDelete(selectedInventory())"
+                    [attr.data-bs-dismiss]="'modal'"></app-button>
+                <app-button [label]="'Cancel'" [customColor]="'grey'" [attr.data-bs-dismiss]="'modal'"></app-button>
+            </div>
+        </div>
+    </app-modal>
+
+    @if(inventory$ | async; as inventory) {
+    <app-inventory-table [tableData]="inventory" (tableElementEdited)="onSelected($event)"
+        (tableElementDeleted)="onSelected($event)"></app-inventory-table>
+    }
+
+</div>
