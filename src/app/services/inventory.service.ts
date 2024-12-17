@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { InventoryModel } from '../models/inventory.model';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class InventoryService {
     return of(id);
   }
 
-  deleteInventory(id: string): Observable<InventoryModel> {
+  deleteInventory(id: string): Observable<void> {
     return new Observable((observer) => {
       this.firestore
         .collection('inventory')

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
+import { InventoryViewModel } from '../../viewModels/inventory.viewModel';
 
 @Component({
   selector: 'app-inventory-form',
@@ -10,10 +11,17 @@ import { ButtonComponent } from '../button/button.component';
   styleUrl: './inventory-form.component.scss',
 })
 export class InventoryFormComponent {
-  inventory = {
+  @Input() inventory: InventoryViewModel = {
     name: '',
     weight: 0,
   };
 
-  onSubmit(form: NgForm) {}
+  @Output() onFormSubmitted: EventEmitter<InventoryViewModel> =
+    new EventEmitter<InventoryViewModel>();
+
+  onSubmit(form: NgForm) {
+    if (form.valid) {
+      this.onFormSubmitted.emit(this.inventory);
+    }
+  }
 }

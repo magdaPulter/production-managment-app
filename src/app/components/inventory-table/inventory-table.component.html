@@ -19,13 +19,15 @@
         <ng-container cdkColumnDef={{displayedColumns[3]}}>
             <th cdk-header-cell *cdkHeaderCellDef> {{displayedColumns[3]}} </th>
             <td cdk-cell *cdkCellDef="let element">
-                <button><i class="bi bi-pencil"></i></button>
+                <button><i data-bs-toggle="modal" data-bs-target="#editModal" class="bi bi-pencil"
+                        (click)="onElementEdit(element)"></i></button>
             </td>
         </ng-container>
         <ng-container cdkColumnDef={{displayedColumns[4]}}>
             <th cdk-header-cell *cdkHeaderCellDef> {{displayedColumns[4]}} </th>
             <td cdk-cell *cdkCellDef="let element">
-                <button data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
+                <button data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="onElementRemoved(element)"><i
+                        class="bi bi-trash3"></i></button>
             </td>
         </ng-container>
 
