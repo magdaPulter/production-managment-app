@@ -7,4 +7,9 @@ button {
   padding: 10px;
   border-radius: 15px;
   font-size: 18px;
+  width: 100%;
+}
+
+button[disabled] {
+  background-color: $color-secondary;
 }
