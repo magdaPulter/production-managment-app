@@ -1,0 +1,36 @@
+@import "../../styles/config";
+
+.orders-list {
+  .list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 820px;
+    mat-accordion {
+      padding: 20px;
+      mat-expansion-panel {
+        box-shadow: none;
+        border: 1px solid $color-primary;
+        border-radius: 15px;
+        font-family: $main-font;
+        width: 700px;
+        max-width: 700px;
+
+        mat-panel-title {
+          font-family: $main-font;
+          font-size: 18px;
+        }
+
+        p,
+        mat-panel-description {
+          font-family: $main-font;
+          font-size: 14px;
+        }
+      }
+    }
+    i {
+      color: $color-primary;
+      font-size: 18px;
+    }
+  }
+}
