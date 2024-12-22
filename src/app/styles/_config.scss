@@ -3,3 +3,35 @@ $color-primary: #218740;
 $color-secondary: #7fb690;
 $white: #ffffff;
 $black: #000000;
+
+%btn {
+  background-color: $color-primary;
+  color: $white;
+  border: none;
+  padding: 10px;
+  border-radius: 15px;
+  font-size: 18px;
+}
+
+%main-content {
+  padding: 100px 60px 60px 60px;
+  font-family: $main-font;
+}
+
+%form-ield {
+  font-family: $main-font;
+  font-size: 18px;
+  display: flex;
+  margin-top: 20px;
+}
+
+%input {
+  //   padding: 20px;
+  //   width: 100%;
+  //   min-width: 440px;
+  border-radius: 15px;
+  border: 1px solid $color-primary;
+  outline: none;
+  margin: 10px 0px;
+  height: 30px;
+}
