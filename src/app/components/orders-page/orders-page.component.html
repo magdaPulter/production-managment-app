@@ -1,0 +1,8 @@
+<div class="main-content">
+    <app-order-form (onSubmitted)="createOrder($event)"></app-order-form>
+
+    @if(orders$ | async; as orders) {
+    <app-orders-list [listItems]="orders"></app-orders-list>
+    }
+
+</div>
