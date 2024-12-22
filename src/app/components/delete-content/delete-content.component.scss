@@ -1,0 +1,12 @@
+.modal-delete {
+  padding: 20px 30px;
+  .buttons {
+    display: flex;
+    justify-content: end;
+    margin-top: 30px;
+    app-button {
+      width: 100px;
+      margin-left: 20px;
+    }
+  }
+}

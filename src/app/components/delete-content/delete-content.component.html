@@ -1,0 +1,7 @@
+<div class="modal-delete">
+    <h3>Are you sure, you want to delete the {{label}}?</h3>
+    <div class="buttons">
+        <app-button [label]="'Yes'" (click)="onDelete()" [attr.data-bs-dismiss]="'modal'"></app-button>
+        <app-button [label]="'Cancel'" [customColor]="'grey'" [attr.data-bs-dismiss]="'modal'"></app-button>
+    </div>
+</div>

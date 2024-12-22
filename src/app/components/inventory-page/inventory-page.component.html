@@ -17,14 +17,7 @@
         </app-inventory-form>
     </app-modal>
     <app-modal [id]="'deleteModal'">
-        <div class="modal-delete">
-            <h3>Are you sure, you want to delete the inventory?</h3>
-            <div class="buttons">
-                <app-button [label]="'Yes'" (click)="onDelete(selectedInventory())"
-                    [attr.data-bs-dismiss]="'modal'"></app-button>
-                <app-button [label]="'Cancel'" [customColor]="'grey'" [attr.data-bs-dismiss]="'modal'"></app-button>
-            </div>
-        </div>
+        <app-delete-content [label]="'inventory'" (deleteEmitted)="onDelete(selectedInventory())"></app-delete-content>
     </app-modal>
 
     @if(inventory$ | async; as inventory) {
