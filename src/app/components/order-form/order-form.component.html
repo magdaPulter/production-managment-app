@@ -1,0 +1,23 @@
+<div class="order-form">
+    <h3>Add new Order</h3>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="form-field">
+            <label for="name">Title</label>
+            <input class="input" type="text" [(ngModel)]="order.name" name="name" name="name" id="name" required
+                #name=ngModel>
+            @if((name.dirty || name.touched) && order.name === ''){
+            <small class="error">Title is obligastory</small>
+            }
+        </div>
+
+        <div class="form-field">
+            <label>Priority:</label>
+            <select [(ngModel)]="order.priority" id="priority" name="priority" #priority=ngModel>
+                @for(priorityLevel of priorityLevels; track priorityLevel) {
+                <option [value]="priorityLevel">{{priorityLevel}}</option>
+                }
+            </select>
+        </div>
+        <button type="submit" [disabled]="form.invalid">Add new order</button>
+    </form>
+</div>
