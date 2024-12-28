@@ -6,14 +6,25 @@
         <small class="error">Title is obligastory</small>
         }
     </div>
-    <div class="form-field">
-        <label for="weight">Weight</label>
-        <input type="number" [(ngModel)]="inventory.weight" name="weight" id="weight" required [min]="1"
-            #weight=ngModel>
-        @if(inventory.weight < 1 && weight.touched){ <small class="error">weight should be a number higher than
-            1</small>
-            }
+    <div class="bottom-fields">
+        <div class="form-field">
+            <label for="value">Value</label>
+            <select [(ngModel)]="inventory.value" id="priority" name="priority" #priority=ngModel>
+                @for(value of inventoryValues; track value) {
+                <option [value]="value">{{value}}</option>
+                }
+            </select>
+        </div>
+        <div class="form-field">
+            <label for="weight">Weight</label>
+            <input type="number" [(ngModel)]="inventory.weight" name="weight" id="weight" required [min]="1"
+                #weight=ngModel>
+            @if(inventory.weight < 1 && weight.touched){ <small class="error">weight should be a number higher than
+                1</small>
+                }
+        </div>
     </div>
+
     <div class="submit">
         <app-button [label]="'Submit'" [type]="'submit'" [isDisabled]="form.invalid"
             [attr.data-bs-dismiss]="form.invalid ? null : 'modal'"></app-button>
