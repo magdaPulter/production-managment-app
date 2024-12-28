@@ -1,58 +1,27 @@
 import { inject, Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, of } from 'rxjs';
 import { InventoryModel } from '../models/inventory.model';
+import { FirestoreService } from './firestore.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InventoryService {
-  private firestore = inject(AngularFirestore);
+  private firestoreService = inject(FirestoreService);
 
   getInventory(): Observable<InventoryModel[]> {
-    return this.firestore
-      .collection<InventoryModel>('inventory')
-      .valueChanges({ idField: 'id' });
+    return this.firestoreService.get('inventory');
   }
 
   createInventory(inventory: InventoryModel): Observable<string> {
-    const id = this.firestore.createId();
-    this.firestore
-      .collection('inventory')
-      .doc(id)
-      .set({ ...inventory, id });
-    return of(id);
+    return this.firestoreService.post('inventory', inventory);
   }
 
   deleteInventory(id: string): Observable<void> {
-    return new Observable((observer) => {
-      this.firestore
-        .collection('inventory')
-        .doc(id)
-        .delete()
-        .then(() => {
-          observer.next();
-          observer.complete();
-        })
-        .catch((error) => {
-          observer.error(error);
-        });
-    });
+    return this.firestoreService.delete(id, 'inventory');
   }
 
   updateInventory(inventory: InventoryModel): Observable<void> {
-    return new Observable((observer) => {
-      this.firestore
-        .collection('inventory')
-        .doc(inventory.id)
-        .update({ ...inventory })
-        .then(() => {
-          observer.next();
-          observer.complete();
-        })
-        .catch((error) => {
-          observer.error(error);
-        });
-    });
+    return this.firestoreService.update('inventory', inventory, inventory.id);
   }
 }

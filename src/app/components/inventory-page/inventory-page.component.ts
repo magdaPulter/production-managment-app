@@ -7,6 +7,7 @@ import { ButtonComponent } from '../button/button.component';
 import { ModalComponent } from '../modal/modal.component';
 import { InventoryFormComponent } from '../inventory-form/inventory-form.component';
 import { InventoryTableComponent } from '../inventory-table/inventory-table.component';
+import { DeleteContentComponent } from '../delete-content/delete-content.component';
 
 @Component({
   selector: 'app-inventory-page',
@@ -17,6 +18,7 @@ import { InventoryTableComponent } from '../inventory-table/inventory-table.comp
     ModalComponent,
     InventoryFormComponent,
     InventoryTableComponent,
+    DeleteContentComponent,
   ],
   templateUrl: './inventory-page.component.html',
   styleUrl: './inventory-page.component.scss',

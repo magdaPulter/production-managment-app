@@ -1,0 +1,47 @@
+@import "../../styles/config";
+
+.order-form {
+  form {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    .form-field {
+      @extend %form-ield;
+      margin-top: 0px;
+      align-items: center;
+      label {
+        margin-right: 10px;
+      }
+      input {
+        @extend %input;
+        color: $color-primary;
+        padding: 0px 10px;
+        width: 350px;
+      }
+      select {
+        @extend %input;
+        color: $color-primary;
+        padding: 0px 10px;
+        padding: 0px, 5px;
+        width: 150px;
+      }
+      .error {
+        color: red;
+        font-size: 14px;
+        margin-left: 15px;
+      }
+    }
+    button {
+      border-radius: 15px;
+      background-color: $white;
+      border: 1px solid $color-primary;
+      color: $color-primary;
+      width: 150px;
+      height: 30px;
+    }
+    button[disabled] {
+      border: 1px solid $color-secondary;
+      color: $color-secondary;
+    }
+  }
+}
