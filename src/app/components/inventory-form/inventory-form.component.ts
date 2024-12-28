@@ -19,7 +19,7 @@ export class InventoryFormComponent {
   @Input() inventory: InventoryViewModel = {
     name: '',
     weight: 0,
-    value: 0.25,
+    value: InventoryValue.QUARTER,
   };
 
   @Output() onFormSubmitted: EventEmitter<InventoryViewModel> =
