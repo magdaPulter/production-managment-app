@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { OrderModel } from '../../models/order.model';
+import { ListItemViewModel } from '../../viewModels/listItem.viewModel';
 
 @Component({
   selector: 'app-order-form',
@@ -10,17 +10,17 @@ import { OrderModel } from '../../models/order.model';
   styleUrl: './order-form.component.scss',
 })
 export class OrderFormComponent {
-  readonly order: OrderModel = {
+  @Input() listItem: ListItemViewModel = {
     name: '',
     priority: 'low',
   };
   readonly priorityLevels: string[] = ['low', 'medium', 'high'];
-  @Output() onSubmitted: EventEmitter<OrderModel> =
-    new EventEmitter<OrderModel>();
+  @Output() onSubmitted: EventEmitter<ListItemViewModel> =
+    new EventEmitter<ListItemViewModel>();
 
   onSubmit(form: NgForm) {
     if (form.valid) {
-      this.onSubmitted.emit(this.order);
+      this.onSubmitted.emit(this.listItem);
     }
   }
 }
