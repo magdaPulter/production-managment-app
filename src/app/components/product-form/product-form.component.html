@@ -1,0 +1,20 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="form-field">
+        <label for="name">Title</label>
+        <select [(ngModel)]="product.name" id="priority" name="priority" #priority=ngModel>
+            @for(fullname of fullnames; track fullname) {
+            <option [value]="fullname">{{fullname}}</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-field">
+        <label for="quantity">Quantity</label>
+        <input type="number" [(ngModel)]="product.quantity" name="quantity" id="quantity" required [min]="1"
+            #quantity=ngModel>
+
+    </div>
+    <button type="submit"><i class="bi bi-plus-circle"></i></button>
+</form>
+@if(product.quantity < 1 && quantity.touched) { <small class="error">weight should be a number higher than 1</small>
+    }

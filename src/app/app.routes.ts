@@ -4,7 +4,7 @@ import { OrdersPageComponent } from './components/orders-page/orders-page.compon
 
 export const routes: Routes = [
   {
-    path: 'inventory-page',
+    path: '',
     component: InventoryPageComponent,
   },
   {

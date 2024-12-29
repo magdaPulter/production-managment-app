@@ -9,11 +9,19 @@ import {
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ListItemViewModel } from '../../viewModels/listItem.viewModel';
 import { OrderFormComponent } from '../order-form/order-form.component';
+import { ProductViewComponent } from '../product-view/product-view.component';
+import { ProductFormComponent } from '../product-form/product-form.component';
+import { ProductViewModel } from '../../viewModels/product.viewModel';
 
 @Component({
   selector: 'app-orders-list',
   standalone: true,
-  imports: [MatExpansionModule, OrderFormComponent],
+  imports: [
+    MatExpansionModule,
+    OrderFormComponent,
+    ProductViewComponent,
+    ProductFormComponent,
+  ],
   templateUrl: './orders-list.component.html',
   styleUrl: './orders-list.component.scss',
 })
@@ -22,11 +30,15 @@ export class OrdersListComponent {
   readonly elementSelectedToEdit: WritableSignal<ListItemViewModel | null> =
     signal(null);
   @Input() listItems!: ListItemViewModel[];
+  @Input() listElements!: ProductViewModel[] | null;
   @Output() listElementDeleted: EventEmitter<ListItemViewModel> =
     new EventEmitter<ListItemViewModel>();
 
   @Output() listElementEdited: EventEmitter<ListItemViewModel> =
     new EventEmitter<ListItemViewModel>();
+
+  @Output() productAdded: EventEmitter<ProductViewModel> =
+    new EventEmitter<ProductViewModel>();
 
   onElementRemoved(element: ListItemViewModel) {
     this.listElementDeleted.emit(element);
@@ -37,5 +49,12 @@ export class OrdersListComponent {
   onCloseEditForm(element: ListItemViewModel) {
     this.listElementEdited.emit(element);
     this.elementSelectedToEdit.set(null);
+  }
+
+  onProductAdded(product: ProductViewModel, element: ListItemViewModel) {
+    if (element.id) {
+      const newProduct = { ...product, orderId: element.id };
+      this.productAdded.emit(newProduct);
+    }
   }
 }

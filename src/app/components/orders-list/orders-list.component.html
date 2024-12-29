@@ -11,7 +11,10 @@
                             Priority: {{listItem.priority}}
                         </mat-panel-description>
                     </mat-expansion-panel-header>
-                    <p>I'm visible because I am open</p>
+                    <app-product-form (productEmitted)="onProductAdded($event, listItem)"></app-product-form>
+
+                    <app-product-view [listItemId]="listItem.id" [items]="listElements"></app-product-view>
+
                 </mat-expansion-panel>
             </mat-accordion>
         </div>

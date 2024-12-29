@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ListItemViewModel } from '../../viewModels/listItem.viewModel';
+import { PriorityLevels } from '../../utils';
 
 @Component({
   selector: 'app-order-form',
@@ -12,9 +13,13 @@ import { ListItemViewModel } from '../../viewModels/listItem.viewModel';
 export class OrderFormComponent {
   @Input() listItem: ListItemViewModel = {
     name: '',
-    priority: 'low',
+    priority: PriorityLevels.LOW,
   };
-  readonly priorityLevels: string[] = ['low', 'medium', 'high'];
+  readonly priorityLevels: string[] = [
+    PriorityLevels.LOW,
+    PriorityLevels.MEDIUM,
+    PriorityLevels.HIGH,
+  ];
   @Output() onSubmitted: EventEmitter<ListItemViewModel> =
     new EventEmitter<ListItemViewModel>();
 

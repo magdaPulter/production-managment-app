@@ -10,6 +10,10 @@ form {
     margin: 10px 0px 30px 0px;
     color: $color-primary;
   }
+  .bottom-fields {
+    display: flex;
+    justify-content: space-between;
+  }
   .form-field {
     font-family: $main-font;
     font-size: 18px;
@@ -20,16 +24,22 @@ form {
     label {
       margin-left: 15px;
     }
-    input {
+
+    input[type="text"] {
+      @extend %input;
       padding: 20px;
       width: 100%;
       min-width: 440px;
-      border-radius: 15px;
-      border: 1px solid $color-primary;
-      outline: none;
-      margin: 10px 0px;
-      height: 30px;
     }
+    input[type="number"],
+    select {
+      @extend %input;
+      color: $color-primary;
+      height: 45px;
+      padding: 10px;
+      width: 200px;
+    }
+
     .error {
       color: red;
       font-size: 14px;

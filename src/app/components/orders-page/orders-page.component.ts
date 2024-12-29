@@ -8,6 +8,8 @@ import { OrdersListComponent } from '../orders-list/orders-list.component';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../modal/modal.component';
 import { DeleteContentComponent } from '../delete-content/delete-content.component';
+import { ProductModel } from '../../models/product.model';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-orders-page',
@@ -29,12 +31,15 @@ export class OrdersPageComponent {
     priority: 'low',
   };
   readonly orderService = inject(OrderService);
+  readonly productService = inject(ProductService);
 
   readonly orders$: Observable<OrderModel[]> = this.orderService.getOrders();
   readonly selectedOrder: WritableSignal<OrderModel> = signal({
     name: '',
     priority: 'low',
   });
+  readonly products$: Observable<ProductModel[]> =
+    this.productService.getProducts();
 
   onSelected(order: OrderModel) {
     this.selectedOrder.set(order);
@@ -52,5 +57,9 @@ export class OrdersPageComponent {
 
   editOrder(order: OrderModel) {
     this.orderService.updateOrder(order).subscribe();
+  }
+
+  createProduct(product: ProductModel) {
+    this.productService.createProduct(product).subscribe();
   }
 }
