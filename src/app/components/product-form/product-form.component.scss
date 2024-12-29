@@ -1,0 +1,28 @@
+@import "../../styles/config";
+
+form {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  font-family: $main-font;
+  .form-field {
+    label {
+      margin-right: 5px;
+    }
+    input {
+      width: 100px;
+    }
+    input,
+    select {
+      @extend %input;
+      padding: 0px 15px;
+    }
+  }
+  button {
+    border: none;
+    background-color: inherit;
+    i {
+      font-size: 18px;
+    }
+  }
+}
