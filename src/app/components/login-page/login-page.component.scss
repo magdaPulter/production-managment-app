@@ -1,0 +1,67 @@
+@import "../../styles/config";
+.login-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 180px;
+  background: linear-gradient($color-secondary, $color-primary);
+
+  .form {
+    height: 400px;
+    width: 400px;
+    font-family: $main-font;
+    color: $white;
+    font-size: 18px;
+
+    h2 {
+      text-align: center;
+    }
+
+    form {
+      padding: 30px;
+
+      .form-field {
+        display: flex;
+        flex-direction: column;
+
+        input {
+          @extend %input;
+          padding: 10px;
+          height: 40px;
+          border: none;
+        }
+        label {
+          margin-top: 10px;
+        }
+        .message {
+          color: $grey;
+        }
+      }
+      small {
+        a {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+
+      .submit-btn {
+        text-align: center;
+        button {
+          background-color: $white;
+          color: $color-primary;
+          font-family: $main-font;
+          padding: 5px 10px;
+          border: none;
+          border-radius: 5px;
+          margin-top: 20px;
+          cursor: pointer;
+        }
+        button[disabled] {
+          background-color: $color-secondary;
+        }
+      }
+    }
+  }
+}
