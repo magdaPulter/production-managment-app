@@ -1,0 +1,16 @@
+<div class="list">
+    <ul>
+        @for(item of items; track item) {
+        @if(listItemId === item.orderId) {
+        <li>
+            <p>{{item.quantity}} x {{item.name}} </p>
+            <div class="buttons">
+                <button><i class="bi bi-pencil"></i></button>
+                <button><i class="bi bi-trash3"></i></button>
+            </div>
+
+        </li>
+        }
+        }
+    </ul>
+</div>
