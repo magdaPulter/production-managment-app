@@ -1,0 +1,79 @@
+<div class="login-page">
+    <div class="form">
+        @if(loginState() === 'login') {
+        <h2>Sign In</h2>
+        <form #loginForm="ngForm" (ngSubmit)="onLoginFormSubmitted(loginForm)">
+            <div class="form-field">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" required email name="email" [(ngModel)]="loginCredentials.email"
+                    #email="ngModel">
+
+                @if(email.invalid && email.touched) {
+                <small class="message">
+                    Please provide a valid email.
+                </small>
+                }
+            </div>
+            <div class="form-field">
+                <label for="loginPassword">Password</label>
+                <input type="password" required id="loginPassword" name="password"
+                    [(ngModel)]="loginCredentials.password">
+            </div>
+            <small>
+                <span>Don't have an account? </span> <a (click)="changeLoginState(register)"> Sign Up</a>
+            </small>
+            <div class="submit-btn">
+                <button type="submit" [disabled]="loginForm.invalid || email.invalid">Login</button>
+            </div>
+        </form>
+        } @else {
+        <h2>Sign Up</h2>
+        <form #registerForm="ngForm" (ngSubmit)="onLoginFormSubmitted(registerForm)">
+            <div class="form-field">
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" required email name="email"
+                    [(ngModel)]="registerCredentials.email" #email="ngModel">
+                @if(email.invalid && email.touched) {
+                <small class="message">
+                    Please provide a valid email.
+                </small>
+                }
+            </div>
+            <div class="form-field">
+                <label for="registerPassword">Password</label>
+                <input type="password" required id="registerPassword" name="registerPassword"
+                    [(ngModel)]="registerCredentials.password" #registerPassword="ngModel"
+                    pattern="^(?=.*[!@#$%^*()])(?=.*[A-Z])(?=.*[a-z]).(?=.*\d).{5,}$">
+                @if(registerPassword.invalid && registerPassword.touched) {
+                <small class="message">
+                    Password must contain at least one special character: !&#64;#$%^*(), at lest one uppercase letter
+                    and at lest one lowercase letter.
+                </small>
+                }
+            </div>
+            <div class="form-field">
+                <label for="registerConfirmPassword">Password</label>
+                <input type="password" required id="registerConfirmPassword" name="registerConfirmPassword"
+                    [(ngModel)]="registerCredentials.confirmPassword" #registerConfirmPassword="ngModel">
+                @if(registerCredentials.password !== registerCredentials.confirmPassword &&
+                registerConfirmPassword.touched) {
+                <small class="message">
+                    Passwords should match!
+                </small>
+                }
+            </div>
+
+            <small>
+                <span>Already have an account? </span> <a (click)="changeLoginState(login)"> Sign In</a>
+            </small>
+            <div class="submit-btn">
+                <button type="submit"
+                    [disabled]="registerForm.invalid || registerCredentials.password !== registerCredentials.confirmPassword">Register</button>
+            </div>
+        </form>
+        }
+
+
+
+    </div>
+</div>
