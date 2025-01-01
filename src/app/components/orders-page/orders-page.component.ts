@@ -13,6 +13,7 @@ import { ProductService } from '../../services/product.service';
 import { ProductQueryModel } from '../../query-models/product.queryModel';
 import { InventoryService } from '../../services/inventory.service';
 import { TitleViewModel } from '../../viewModels/title.viewModel';
+import { ProductTableComponent } from '../product-table/product-table.component';
 
 @Component({
   selector: 'app-orders-page',
@@ -24,6 +25,7 @@ import { TitleViewModel } from '../../viewModels/title.viewModel';
     OrdersListComponent,
     ModalComponent,
     DeleteContentComponent,
+    ProductTableComponent,
   ],
   templateUrl: './orders-page.component.html',
   styleUrl: './orders-page.component.scss',
