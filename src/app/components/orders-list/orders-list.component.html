@@ -11,7 +11,8 @@
                             Priority: {{listItem.priority}}
                         </mat-panel-description>
                     </mat-expansion-panel-header>
-                    <app-product-form (productEmitted)="onProductAdded($event, listItem)"></app-product-form>
+                    <app-product-form [titles]="titles"
+                        (productEmitted)="onProductAdded($event, listItem)"></app-product-form>
 
                     <app-product-view [listItemId]="listItem.id" [items]="listElements"></app-product-view>
 

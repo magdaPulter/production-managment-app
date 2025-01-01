@@ -1,6 +1,6 @@
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { OrderModel } from '../../models/order.model';
 import { OrderService } from '../../services/order.service';
 import { OrderFormComponent } from '../order-form/order-form.component';
@@ -10,6 +10,9 @@ import { ModalComponent } from '../modal/modal.component';
 import { DeleteContentComponent } from '../delete-content/delete-content.component';
 import { ProductModel } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
+import { ProductQueryModel } from '../../query-models/product.queryModel';
+import { InventoryService } from '../../services/inventory.service';
+import { TitleViewModel } from '../../viewModels/title.viewModel';
 
 @Component({
   selector: 'app-orders-page',
@@ -32,14 +35,28 @@ export class OrdersPageComponent {
   };
   readonly orderService = inject(OrderService);
   readonly productService = inject(ProductService);
+  readonly inventoryService = inject(InventoryService);
 
   readonly orders$: Observable<OrderModel[]> = this.orderService.getOrders();
   readonly selectedOrder: WritableSignal<OrderModel> = signal({
     name: '',
     priority: 'low',
   });
-  readonly products$: Observable<ProductModel[]> =
-    this.productService.getProducts();
+
+  readonly products$: Observable<ProductQueryModel[]> =
+    this.productService.getProductsWithFullname();
+
+  readonly inventory$: Observable<TitleViewModel[]> = this.inventoryService
+    .getInventory()
+    .pipe(
+      map((inventories) =>
+        inventories.map((inventory) => {
+          return {
+            title: inventory.name,
+          };
+        })
+      )
+    );
 
   onSelected(order: OrderModel) {
     this.selectedOrder.set(order);

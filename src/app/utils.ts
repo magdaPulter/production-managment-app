@@ -1,4 +1,4 @@
-export enum InventoryValue {
+export enum ProductValue {
   QUARTER = 0.25,
   WHOLE = 1,
 }

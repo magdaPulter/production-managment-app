@@ -12,6 +12,8 @@ import { OrderFormComponent } from '../order-form/order-form.component';
 import { ProductViewComponent } from '../product-view/product-view.component';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { ProductViewModel } from '../../viewModels/product.viewModel';
+import { ProductQueryModel } from '../../query-models/product.queryModel';
+import { TitleViewModel } from '../../viewModels/title.viewModel';
 
 @Component({
   selector: 'app-orders-list',
@@ -30,7 +32,8 @@ export class OrdersListComponent {
   readonly elementSelectedToEdit: WritableSignal<ListItemViewModel | null> =
     signal(null);
   @Input() listItems!: ListItemViewModel[];
-  @Input() listElements!: ProductViewModel[] | null;
+  @Input() listElements!: ProductQueryModel[] | null;
+  @Input() titles!: TitleViewModel[];
   @Output() listElementDeleted: EventEmitter<ListItemViewModel> =
     new EventEmitter<ListItemViewModel>();
 

@@ -6,7 +6,7 @@
     @if(orders$ | async; as orders) {
     <app-orders-list [listItems]="orders" (listElementDeleted)="onSelected($event)"
         (listElementEdited)="editOrder($event)" (productAdded)="createProduct($event)"
-        [listElements]="products$ | async">
+        [listElements]="products$ | async" [titles]="(inventory$ | async)!">
     </app-orders-list>
     }
 
