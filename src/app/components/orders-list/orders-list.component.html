@@ -20,7 +20,9 @@
             </mat-accordion>
         </div>
 
-        <button (click)="onElementEditted(listItem)"><i class="bi bi-pencil"></i></button>
+        <button (click)="onElementEditted(listItem)">
+            <i [ngClass]="toggleIcon() ? 'bi bi-pencil' : 'bi bi-x-lg' "></i>
+        </button>
         <button data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="onElementRemoved(listItem)"><i
                 class="bi bi-trash3"></i></button>
     </div>
