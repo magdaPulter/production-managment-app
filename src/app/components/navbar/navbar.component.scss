@@ -6,12 +6,20 @@
   width: 100%;
   background-color: $color-primary;
   height: 66px;
+  line-height: 19px;
+  font-family: $main-font;
+  p {
+    position: absolute;
+    right: 80px;
+    top: 20px;
+    color: $white;
+    font-size: 20px;
+    cursor: pointer;
+  }
   .list {
     display: flex;
     color: $white;
     font-size: 24px;
-    line-height: 19px;
-    font-family: $main-font;
     display: flex;
     gap: 90px;
     align-items: center;

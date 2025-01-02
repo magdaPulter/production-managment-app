@@ -22,13 +22,14 @@
             <small>
                 <span>Don't have an account? </span> <a (click)="changeLoginState(register)"> Sign Up</a>
             </small>
+            <p class="error">{{errorMessage()}}</p>
             <div class="submit-btn">
                 <button type="submit" [disabled]="loginForm.invalid || email.invalid">Login</button>
             </div>
         </form>
         } @else {
         <h2>Sign Up</h2>
-        <form #registerForm="ngForm" (ngSubmit)="onLoginFormSubmitted(registerForm)">
+        <form #registerForm="ngForm" (ngSubmit)="onRegisterFormSubmitted(registerForm)">
             <div class="form-field">
                 <label for="registerEmail">Email</label>
                 <input type="email" id="registerEmail" required email name="email"
@@ -66,6 +67,7 @@
             <small>
                 <span>Already have an account? </span> <a (click)="changeLoginState(login)"> Sign In</a>
             </small>
+            <p class="error">{{errorMessage()}}</p>
             <div class="submit-btn">
                 <button type="submit"
                     [disabled]="registerForm.invalid || registerCredentials.password !== registerCredentials.confirmPassword">Register</button>
