@@ -33,3 +33,24 @@ $grey: #4e4d4d;
   margin: 10px 0px;
   height: 30px;
 }
+
+%table {
+  width: 100%;
+  text-align: center;
+  th {
+    padding: 5px 20px;
+    text-align: center;
+    border-bottom: 1px solid $color-primary;
+  }
+  td {
+    border-bottom: 1px solid $color-primary;
+    padding: 5px 20px;
+    button {
+      border: none;
+      background-color: inherit;
+      i {
+        color: $color-primary;
+      }
+    }
+  }
+}

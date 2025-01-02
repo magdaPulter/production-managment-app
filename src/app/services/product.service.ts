@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { FirestoreService } from './firestore.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ProductModel } from '../models/product.model';
+import { ProductQueryModel } from '../query-models/product.queryModel';
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +24,20 @@ export class ProductService {
 
   updateProduct(product: ProductModel): Observable<void> {
     return this.firestoreService.update('products', product, product.id);
+  }
+
+  getProductsWithFullname(): Observable<ProductQueryModel[]> {
+    return this.getProducts().pipe(
+      map((products) => {
+        return products.map((product) => {
+          return {
+            id: product.id,
+            quantity: product.quantity,
+            orderId: product.orderId,
+            fullname: `${product.value}kg ${product.name}`,
+          };
+        });
+      })
+    );
   }
 }

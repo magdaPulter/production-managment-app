@@ -1,0 +1,15 @@
+@import "../../styles/config";
+
+.table {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid $color-primary;
+  border-radius: 10px;
+  width: 1000px;
+  table {
+    @extend %table;
+    width: 100%;
+  }
+}

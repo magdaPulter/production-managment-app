@@ -2,7 +2,6 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { InventoryModel } from '../models/inventory.model';
 import { FirestoreService } from './firestore.service';
-import { InventoryQueryModel } from '../query-models/inventory.queryModel';
 
 @Injectable({
   providedIn: 'root',
@@ -24,18 +23,5 @@ export class InventoryService {
 
   updateInventory(inventory: InventoryModel): Observable<void> {
     return this.firestoreService.update('inventory', inventory, inventory.id);
-  }
-
-  getInventoryWithFullname(): Observable<InventoryQueryModel[]> {
-    return this.getInventory().pipe(
-      map((inventories) => {
-        return inventories.map((inventory) => {
-          return {
-            id: inventory.id,
-            fullname: `${inventory.value}kg ${inventory.name}`,
-          };
-        });
-      })
-    );
   }
 }

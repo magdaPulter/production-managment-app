@@ -12,6 +12,9 @@ import { OrderFormComponent } from '../order-form/order-form.component';
 import { ProductViewComponent } from '../product-view/product-view.component';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { ProductViewModel } from '../../viewModels/product.viewModel';
+import { ProductQueryModel } from '../../query-models/product.queryModel';
+import { TitleViewModel } from '../../viewModels/title.viewModel';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-orders-list',
@@ -21,6 +24,7 @@ import { ProductViewModel } from '../../viewModels/product.viewModel';
     OrderFormComponent,
     ProductViewComponent,
     ProductFormComponent,
+    CommonModule,
   ],
   templateUrl: './orders-list.component.html',
   styleUrl: './orders-list.component.scss',
@@ -29,8 +33,10 @@ export class OrdersListComponent {
   readonly panelOpenState = signal(false);
   readonly elementSelectedToEdit: WritableSignal<ListItemViewModel | null> =
     signal(null);
+  readonly toggleIcon: WritableSignal<boolean> = signal(true);
   @Input() listItems!: ListItemViewModel[];
-  @Input() listElements!: ProductViewModel[] | null;
+  @Input() listElements!: ProductQueryModel[] | null;
+  @Input() titles!: TitleViewModel[];
   @Output() listElementDeleted: EventEmitter<ListItemViewModel> =
     new EventEmitter<ListItemViewModel>();
 
@@ -44,7 +50,10 @@ export class OrdersListComponent {
     this.listElementDeleted.emit(element);
   }
   onElementEditted(element: ListItemViewModel) {
-    this.elementSelectedToEdit.set(element);
+    this.toggleIcon.update((flag) => !flag);
+    return this.toggleIcon()
+      ? this.elementSelectedToEdit.set(null)
+      : this.elementSelectedToEdit.set(element);
   }
   onCloseEditForm(element: ListItemViewModel) {
     this.listElementEdited.emit(element);

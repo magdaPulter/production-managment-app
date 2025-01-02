@@ -8,14 +8,6 @@
     </div>
     <div class="bottom-fields">
         <div class="form-field">
-            <label for="value">Value</label>
-            <select [(ngModel)]="inventory.value" id="priority" name="priority" #priority=ngModel>
-                @for(value of inventoryValues; track value) {
-                <option [value]="value">{{value}}</option>
-                }
-            </select>
-        </div>
-        <div class="form-field">
             <label for="weight">Weight</label>
             <input type="number" [(ngModel)]="inventory.weight" name="weight" id="weight" required [min]="1"
                 #weight=ngModel>
