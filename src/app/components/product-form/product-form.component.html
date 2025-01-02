@@ -1,18 +1,24 @@
 <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <div class="form-field">
         <label for="name">Title</label>
-        <select [(ngModel)]="product.name" id="priority" name="priority" #priority=ngModel>
-            @for(fullname of fullnames; track fullname) {
-            <option [value]="fullname">{{fullname}}</option>
+        <select [(ngModel)]="product.name" id="name" name="name" #name=ngModel>
+            @for(title of titles; track title) {
+            <option [value]="title.title">{{title.title}}</option>
             }
         </select>
     </div>
-
+    <div class="form-field">
+        <label for="value">Value</label>
+        <select [(ngModel)]="product.value" id="value" name="value" #value=ngModel>
+            @for(value of productValues; track value) {
+            <option [value]="value">{{value}}</option>
+            }
+        </select>
+    </div>
     <div class="form-field">
         <label for="quantity">Quantity</label>
         <input type="number" [(ngModel)]="product.quantity" name="quantity" id="quantity" required [min]="1"
             #quantity=ngModel>
-
     </div>
     <button type="submit"><i class="bi bi-plus-circle"></i></button>
 </form>

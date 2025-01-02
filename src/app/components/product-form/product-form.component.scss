@@ -10,12 +10,12 @@ form {
       margin-right: 5px;
     }
     input {
-      width: 100px;
+      padding: 0px 10px;
+      width: 50px;
     }
     input,
     select {
       @extend %input;
-      padding: 0px 15px;
     }
   }
   button {

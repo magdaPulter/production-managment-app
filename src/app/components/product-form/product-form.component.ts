@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ProductViewModel } from '../../viewModels/product.viewModel';
+import { ProductValue } from '../../utils';
+import { TitleViewModel } from '../../viewModels/title.viewModel';
 
 @Component({
   selector: 'app-product-form',
@@ -13,13 +15,10 @@ export class ProductFormComponent {
   public product: ProductViewModel = {
     name: '',
     quantity: 1,
+    value: ProductValue.QUARTER,
   };
-  @Input() fullnames: string[] = [
-    'Lorem ipsum dolor sit amet',
-    'consectetur adipiscing elit',
-    'sed do eiusmod tempor incididunt',
-    'do eiusmod tempor incididunt',
-  ];
+  readonly productValues: number[] = [ProductValue.QUARTER, ProductValue.WHOLE];
+  @Input() titles!: TitleViewModel[];
   @Output() productEmitted: EventEmitter<ProductViewModel> =
     new EventEmitter<ProductViewModel>();
 
@@ -29,6 +28,7 @@ export class ProductFormComponent {
       this.product = {
         name: '',
         quantity: 1,
+        value: ProductValue.QUARTER,
       };
     }
   }

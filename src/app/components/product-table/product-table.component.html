@@ -1,0 +1,29 @@
+@if(tableData) {
+<div class="table">
+    <table cdk-table [dataSource]="tableData">
+        <ng-container cdkColumnDef={{displayedColumns[0]}}>
+            <th cdk-header-cell *cdkHeaderCellDef> {{displayedColumns[0]}} </th>
+            <td cdk-cell *cdkCellDef="let element; let i = index;"> {{i + 1}} </td>
+        </ng-container>
+
+        <ng-container cdkColumnDef={{displayedColumns[1]}}>
+            <th cdk-header-cell *cdkHeaderCellDef> {{displayedColumns[1]}} </th>
+            <td cdk-cell *cdkCellDef="let element"> {{element.fullname}} </td>
+        </ng-container>
+
+        <ng-container cdkColumnDef={{displayedColumns[2]}}>
+            <th cdk-header-cell *cdkHeaderCellDef> {{displayedColumns[2]}} </th>
+            <td cdk-cell *cdkCellDef="let element"> {{element.quantity}} </td>
+        </ng-container>
+
+        <ng-container cdkColumnDef={{displayedColumns[3]}}>
+            <th cdk-header-cell *cdkHeaderCellDef> {{displayedColumns[3]}} </th>
+            <td cdk-cell *cdkCellDef="let element">{{element.orderId}}</td>
+        </ng-container>
+
+        <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+        <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+}

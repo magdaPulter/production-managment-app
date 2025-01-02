@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProductViewModel } from '../../viewModels/product.viewModel';
+import { ProductQueryModel } from '../../query-models/product.queryModel';
 
 @Component({
   selector: 'app-product-view',
@@ -10,5 +10,5 @@ import { ProductViewModel } from '../../viewModels/product.viewModel';
 })
 export class ProductViewComponent {
   @Input() listItemId!: string | undefined;
-  @Input() items!: ProductViewModel[] | null;
+  @Input() items!: ProductQueryModel[] | null;
 }

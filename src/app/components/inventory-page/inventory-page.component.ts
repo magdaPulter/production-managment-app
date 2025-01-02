@@ -27,7 +27,6 @@ export class InventoryPageComponent {
   readonly inventory: WritableSignal<InventoryModel> = signal({
     name: '',
     weight: 0,
-    value: 0.25,
   });
 
   readonly selectedInventory: WritableSignal<InventoryModel> = signal(
@@ -50,7 +49,7 @@ export class InventoryPageComponent {
   }
 
   editInventory(inventory: InventoryModel) {
-    this.inventoryService.updateInventory(inventory);
+    this.inventoryService.updateInventory(inventory).subscribe();
   }
 
   onSelected(inventory: InventoryModel) {

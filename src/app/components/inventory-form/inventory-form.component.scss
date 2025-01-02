@@ -12,7 +12,7 @@ form {
   }
   .bottom-fields {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
   .form-field {
     font-family: $main-font;
