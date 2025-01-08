@@ -16,7 +16,7 @@ import { TitleViewModel } from '../../viewModels/title.viewModel';
 import { ProductTableComponent } from '../product-table/product-table.component';
 
 @Component({
-  selector: 'app-orders-page',
+  selector: 'app-orders',
   standalone: true,
   imports: [
     FormsModule,
@@ -27,10 +27,10 @@ import { ProductTableComponent } from '../product-table/product-table.component'
     DeleteContentComponent,
     ProductTableComponent,
   ],
-  templateUrl: './orders-page.component.html',
-  styleUrl: './orders-page.component.scss',
+  templateUrl: './orders.component.html',
+  styleUrl: './orders.component.scss',
 })
-export class OrdersPageComponent {
+export class OrdersComponent {
   readonly order: OrderModel = {
     name: '',
     priority: 'low',

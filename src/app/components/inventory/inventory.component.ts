@@ -10,7 +10,7 @@ import { InventoryTableComponent } from '../inventory-table/inventory-table.comp
 import { DeleteContentComponent } from '../delete-content/delete-content.component';
 
 @Component({
-  selector: 'app-inventory-page',
+  selector: 'app-inventory',
   standalone: true,
   imports: [
     CommonModule,
@@ -20,10 +20,10 @@ import { DeleteContentComponent } from '../delete-content/delete-content.compone
     InventoryTableComponent,
     DeleteContentComponent,
   ],
-  templateUrl: './inventory-page.component.html',
-  styleUrl: './inventory-page.component.scss',
+  templateUrl: './inventory.component.html',
+  styleUrl: './inventory.component.scss',
 })
-export class InventoryPageComponent {
+export class InventoryComponent {
   readonly inventory: WritableSignal<InventoryModel> = signal({
     name: '',
     weight: 0,

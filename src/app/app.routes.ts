@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { InventoryPageComponent } from './components/inventory-page/inventory-page.component';
-import { OrdersPageComponent } from './components/orders-page/orders-page.component';
+import { InventoryComponent } from './components/inventory/inventory.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: InventoryPageComponent,
+    component: InventoryComponent,
   },
   {
     path: 'orders-page',
-    component: OrdersPageComponent,
+    component: OrdersComponent,
   },
 ];
