@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { InventoryViewModel } from '../../viewModels/inventory.viewModel';
 import { CdkTableModule } from '@angular/cdk/table';
+import { IdTagPipe } from '../../pipes/id-tag.pipe';
 
 @Component({
   selector: 'app-inventory-table',
   standalone: true,
-  imports: [CdkTableModule],
+  imports: [CdkTableModule, IdTagPipe],
   templateUrl: './inventory-table.component.html',
   styleUrl: './inventory-table.component.scss',
 })
