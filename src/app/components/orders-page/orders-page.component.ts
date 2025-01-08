@@ -45,6 +45,11 @@ export class OrdersPageComponent {
     priority: 'low',
   });
 
+  readonly selectedProduct: WritableSignal<ProductQueryModel> = signal({
+    fullname: '',
+    quantity: 0,
+  });
+
   readonly products$: Observable<ProductQueryModel[]> =
     this.productService.getProductsWithFullname();
 
@@ -64,7 +69,11 @@ export class OrdersPageComponent {
     this.selectedOrder.set(order);
   }
 
-  onDelete(order: OrderModel) {
+  onProductSelected(product: ProductQueryModel) {
+    this.selectedProduct.set(product);
+  }
+
+  deleteOrder(order: OrderModel) {
     if (order.id) {
       this.orderService.deleteOrder(order.id).subscribe();
     }
@@ -80,5 +89,15 @@ export class OrdersPageComponent {
 
   createProduct(product: ProductModel) {
     this.productService.createProduct(product).subscribe();
+  }
+
+  deleteProduct(product: ProductQueryModel) {
+    if (product.id) {
+      this.productService.deleteProduct(product.id).subscribe();
+    }
+  }
+
+  editProduct(product: ProductModel) {
+    this.productService.updateProduct(product).subscribe();
   }
 }

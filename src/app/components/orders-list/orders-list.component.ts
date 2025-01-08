@@ -46,6 +46,9 @@ export class OrdersListComponent {
   @Output() productAdded: EventEmitter<ProductViewModel> =
     new EventEmitter<ProductViewModel>();
 
+  @Output() productDeleted: EventEmitter<ProductQueryModel> =
+    new EventEmitter<ProductQueryModel>();
+
   onElementRemoved(element: ListItemViewModel) {
     this.listElementDeleted.emit(element);
   }
@@ -65,5 +68,9 @@ export class OrdersListComponent {
       const newProduct = { ...product, orderId: element.id };
       this.productAdded.emit(newProduct);
     }
+  }
+
+  deleteEmitted(product: ProductQueryModel) {
+    this.productDeleted.emit(product);
   }
 }
