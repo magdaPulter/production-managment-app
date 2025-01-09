@@ -3,7 +3,7 @@
     <table cdk-table [dataSource]="tableData">
         <ng-container cdkColumnDef={{displayedColumns[0]}}>
             <th cdk-header-cell *cdkHeaderCellDef> {{displayedColumns[0]}} </th>
-            <td cdk-cell *cdkCellDef="let element; let i = index;"> {{i + 1}} </td>
+            <td cdk-cell *cdkCellDef="let element; let i = index;"> {{element.id | idTag : element.name}} </td>
         </ng-container>
 
         <ng-container cdkColumnDef={{displayedColumns[1]}}>

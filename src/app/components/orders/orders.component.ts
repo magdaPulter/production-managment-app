@@ -1,6 +1,6 @@
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { map, Observable } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import { OrderModel } from '../../models/order.model';
 import { OrderService } from '../../services/order.service';
 import { OrderFormComponent } from '../order-form/order-form.component';
@@ -14,9 +14,10 @@ import { ProductQueryModel } from '../../query-models/product.queryModel';
 import { InventoryService } from '../../services/inventory.service';
 import { TitleViewModel } from '../../viewModels/title.viewModel';
 import { ProductTableComponent } from '../product-table/product-table.component';
+import { ProductSumQueryModel } from '../../query-models/product-sum.queryModel';
 
 @Component({
-  selector: 'app-orders-page',
+  selector: 'app-orders',
   standalone: true,
   imports: [
     FormsModule,
@@ -27,10 +28,10 @@ import { ProductTableComponent } from '../product-table/product-table.component'
     DeleteContentComponent,
     ProductTableComponent,
   ],
-  templateUrl: './orders-page.component.html',
-  styleUrl: './orders-page.component.scss',
+  templateUrl: './orders.component.html',
+  styleUrl: './orders.component.scss',
 })
-export class OrdersPageComponent {
+export class OrdersComponent {
   readonly order: OrderModel = {
     name: '',
     priority: 'low',
@@ -43,6 +44,12 @@ export class OrdersPageComponent {
   readonly selectedOrder: WritableSignal<OrderModel> = signal({
     name: '',
     priority: 'low',
+  });
+
+  readonly selectedProduct: WritableSignal<ProductQueryModel> = signal({
+    fullname: '',
+    quantity: 0,
+    orderId: '',
   });
 
   readonly products$: Observable<ProductQueryModel[]> =
@@ -59,12 +66,52 @@ export class OrdersPageComponent {
         })
       )
     );
+  readonly productSumWithTheSameName$: Observable<ProductSumQueryModel[]> =
+    this.products$.pipe(
+      map((products) => {
+        return Object.values(
+          products.reduce<Record<string, ProductSumQueryModel>>((acc, prod) => {
+            if (!acc[prod.fullname]) {
+              acc[prod.fullname] = {
+                fullname: prod.fullname,
+                quantity: 0,
+                orderId: [],
+              };
+            }
+            acc[prod.fullname].quantity += prod.quantity;
+            acc[prod.fullname].orderId.push(prod.orderId);
+            return acc;
+          }, {})
+        );
+      })
+    );
+
+  readonly productSumWithTheSameNameWithOrdersName$: Observable<
+    ProductSumQueryModel[]
+  > = combineLatest([this.productSumWithTheSameName$, this.orders$]).pipe(
+    map(([products, orders]) => {
+      const orderMap = orders.reduce((acc, ord) => {
+        return { ...acc, [ord.id!]: ord.name };
+      }, {} as Record<string, string>);
+      return products.map((product) => {
+        return {
+          fullname: product.fullname,
+          quantity: product.quantity,
+          orderId: product.orderId.map((order) => orderMap[order]),
+        };
+      });
+    })
+  );
 
   onSelected(order: OrderModel) {
     this.selectedOrder.set(order);
   }
 
-  onDelete(order: OrderModel) {
+  onProductSelected(product: ProductQueryModel) {
+    this.selectedProduct.set(product);
+  }
+
+  deleteOrder(order: OrderModel) {
     if (order.id) {
       this.orderService.deleteOrder(order.id).subscribe();
     }
@@ -80,5 +127,15 @@ export class OrdersPageComponent {
 
   createProduct(product: ProductModel) {
     this.productService.createProduct(product).subscribe();
+  }
+
+  deleteProduct(product: ProductQueryModel) {
+    if (product.id) {
+      this.productService.deleteProduct(product.id).subscribe();
+    }
+  }
+
+  editProduct(product: ProductModel) {
+    this.productService.updateProduct(product).subscribe();
   }
 }

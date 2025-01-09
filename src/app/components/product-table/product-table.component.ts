@@ -1,6 +1,6 @@
 import { CdkTableModule } from '@angular/cdk/table';
 import { Component, Input } from '@angular/core';
-import { ProductQueryModel } from '../../query-models/product.queryModel';
+import { ProductSumQueryModel } from '../../query-models/product-sum.queryModel';
 
 @Component({
   selector: 'app-product-table',
@@ -10,7 +10,7 @@ import { ProductQueryModel } from '../../query-models/product.queryModel';
   styleUrl: './product-table.component.scss',
 })
 export class ProductTableComponent {
-  @Input() tableData!: ProductQueryModel[];
+  @Input() tableData!: ProductSumQueryModel[];
 
   displayedColumns: string[] = ['No.', 'Name', 'Quantity', 'Orders'];
 }

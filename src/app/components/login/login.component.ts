@@ -18,13 +18,13 @@ export enum LoginState {
   REGISTER = 'register',
 }
 @Component({
-  selector: 'app-login-page',
+  selector: 'app-login',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './login-page.component.html',
-  styleUrl: './login-page.component.scss',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
-export class LoginPageComponent {
+export class LoginComponent {
   readonly registerCredentials: RegisterModel = {
     email: '',
     password: '',

@@ -15,6 +15,7 @@ export class ProductFormComponent {
   public product: ProductViewModel = {
     name: '',
     quantity: 1,
+    orderId: '',
     value: ProductValue.QUARTER,
   };
   readonly productValues: number[] = [ProductValue.QUARTER, ProductValue.WHOLE];
@@ -28,6 +29,7 @@ export class ProductFormComponent {
       this.product = {
         name: '',
         quantity: 1,
+        orderId: '',
         value: ProductValue.QUARTER,
       };
     }

@@ -5,8 +5,9 @@
         <li>
             <p>{{item.quantity}} x {{item.fullname}} </p>
             <div class="buttons">
-                <button><i class="bi bi-pencil"></i></button>
-                <button><i class="bi bi-trash3"></i></button>
+                <button ><i class="bi bi-pencil"></i></button>
+                <button data-bs-toggle="modal" data-bs-target="#deleteProductModal" (click)="onElementRemoved(item)"><i
+                        class="bi bi-trash3"></i></button>
             </div>
 
         </li>

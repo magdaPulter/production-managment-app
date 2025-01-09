@@ -1,14 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { LoginPageComponent } from './components/login-page/login-page.component';
+import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth.service';
 import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, LoginPageComponent],
+  imports: [RouterOutlet, NavbarComponent, LoginComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

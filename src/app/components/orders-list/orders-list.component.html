@@ -14,7 +14,8 @@
                     <app-product-form [titles]="titles"
                         (productEmitted)="onProductAdded($event, listItem)"></app-product-form>
 
-                    <app-product-view [listItemId]="listItem.id" [items]="listElements"></app-product-view>
+                    <app-product-view [listItemId]="listItem.id" [items]="listElements"
+                        (itemDeleted)="deleteEmitted($event)"></app-product-view>
 
                 </mat-expansion-panel>
             </mat-accordion>
