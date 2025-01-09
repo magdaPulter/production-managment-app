@@ -19,7 +19,7 @@
         <app-delete-content [label]="'product'" (deleteEmitted)="deleteProduct(selectedProduct())"></app-delete-content>
     </app-modal>
 
-    @if(products$ | async; as products) {
+    @if(productSumWithTheSameNameWithOrdersName$ | async; as products) {
     <app-product-table [tableData]="products"></app-product-table>
     }
 </div>
