@@ -43,3 +43,31 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .nav {
+    .list {
+      gap: 20px;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .nav {
+    height: 0px;
+    button {
+      position: fixed;
+      top: 2s0px;
+      right: 20px;
+      background-color: $color-primary;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      i {
+        color: $white;
+        font-size: 24px;
+      }
+    }
+  }
+}
