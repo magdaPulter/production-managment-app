@@ -10,6 +10,9 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { AuthReducer } from './store/auth-store/reducers';
+import { AuthEffects } from './store/auth-store/effects';
+import { provideEffects } from '@ngrx/effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,7 +25,8 @@ export const appConfig: ApplicationConfig = {
       AngularFireAuthModule,
     ]),
     provideAnimationsAsync(),
-    provideStore(),
+    provideStore({ auth: AuthReducer }),
     provideStoreDevtools({ maxAge: 25 }),
+    provideEffects(AuthEffects),
   ],
 };
