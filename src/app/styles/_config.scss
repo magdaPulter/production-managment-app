@@ -52,3 +52,16 @@ $grey: #4e4d4d;
     }
   }
 }
+
+@media (max-width: 320px) {
+  %btn-nav {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: $color-primary;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+}

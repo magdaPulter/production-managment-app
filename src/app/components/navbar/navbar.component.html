@@ -6,3 +6,17 @@
     </ul>
     <p (click)="logOut()">Logout</p>
 </div>
+
+<button (click)="onButtonclicked()"><i class="bi bi-list"></i></button>
+
+@if(isMenuOpen()) {
+<div @openClose class="nav-mobile">
+    <button (click)="onButtonclicked()"><i class="bi bi-list"></i></button>
+    <ul class="list">
+        <li class="list-item"><a [routerLink]="'/'">Inventory</a></li>
+        <li class="list-item"><a [routerLink]="'orders-page'">Orders Menagement</a></li>
+        <li class="list-item"><a>Production</a></li>
+    </ul>
+    <p (click)="logOut()">Logout</p>
+</div>
+}
