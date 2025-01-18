@@ -1,8 +1,10 @@
 @import "../../styles/config";
 
 .main-content {
-  padding: 100px 60px 60px 60px;
-
+  @extend %main-content;
+  h1 {
+    font-weight: 500;
+  }
   .top {
     display: flex;
     justify-content: space-between;

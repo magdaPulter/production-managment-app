@@ -1,0 +1,38 @@
+@import "../../styles/config";
+
+form {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  .form-field {
+    @extend %form-ield;
+    margin-top: 0px;
+    align-items: center;
+    label {
+      margin-right: 10px;
+    }
+    input {
+      @extend %input;
+      color: $color-primary;
+      padding: 0px 10px;
+      width: 100px;
+    }
+    select {
+      @extend %input;
+      color: $color-primary;
+      padding: 0px 10px;
+      padding: 0px, 5px;
+      width: 350px;
+    }
+    .error {
+      @extend %form-error;
+    }
+  }
+  button {
+    @extend %form-btn;
+  }
+  button[disabled] {
+    border: 1px solid $color-secondary;
+    color: $color-secondary;
+  }
+}

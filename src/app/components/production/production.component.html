@@ -1,0 +1,7 @@
+@if(inventory$ | async; as inventoryList) {
+<app-stock [inventory]="inventoryList"></app-stock>
+}
+
+<app-cards-list></app-cards-list>
+
+<app-production-summary></app-production-summary>
