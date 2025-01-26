@@ -13,6 +13,8 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { AuthReducer } from './store/auth-store/reducers';
 import { AuthEffects } from './store/auth-store/effects';
 import { provideEffects } from '@ngrx/effects';
+import { ProductionEffects } from './store/production-store/effects';
+import { ProductionReducer } from './store/production-store/reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,8 +27,8 @@ export const appConfig: ApplicationConfig = {
       AngularFireAuthModule,
     ]),
     provideAnimationsAsync(),
-    provideStore({ auth: AuthReducer }),
+    provideStore({ auth: AuthReducer, production: ProductionReducer }),
     provideStoreDevtools({ maxAge: 25 }),
-    provideEffects(AuthEffects),
+    provideEffects([AuthEffects, ProductionEffects]),
   ],
 };

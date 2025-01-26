@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { StockViewModel } from '../../viewModels/stock.viewModel';
 import { InventoryViewModel } from '../../viewModels/inventory.viewModel';
+import { Store } from '@ngrx/store';
+import { ProductionActions } from '../../store/production-store/actions';
 
 @Component({
   selector: 'app-stock-form',
@@ -16,15 +18,24 @@ export class StockFormComponent {
   @Input() stockItem: StockViewModel = {
     name: '',
     weight: 1,
+    id: '',
   };
-
-  // @Output() onSubmitted: EventEmitter<StockViewModel> =
-  //   new EventEmitter<StockViewModel>();
+  readonly store = inject(Store);
 
   onSubmit(form: NgForm) {
     if (form.valid) {
+      const id = this.stockItem.name.split(' ').join('');
+      this.stockItem.id = id;
       console.log(this.stockItem);
-      // this.onSubmitted.emit(this.stockItem);
+      this.store.dispatch(
+        ProductionActions.addProductToStock({ stockProduct: this.stockItem })
+      );
+      this.stockItem = {
+        name: '',
+        weight: 1,
+        id: '',
+      };
+      this.store.dispatch(ProductionActions.saveProductToLocalStorage());
     }
   }
 }
