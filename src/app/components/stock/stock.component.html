@@ -1,4 +1,8 @@
 <div class="main-content">
-    <h4>In Stock</h4>
+    <div class="top">
+        <h4>In Stock</h4>
+        <button (click)="onStockCleared()">Clear Stock</button>
+    </div>
+
     <app-stock-form [inventoryList]="inventory"></app-stock-form>
 </div>
