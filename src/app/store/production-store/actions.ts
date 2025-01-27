@@ -6,7 +6,7 @@ export const ProductionActions = createActionGroup({
   events: {
     'Add product to stock': props<{ stockProduct: StockModel }>(),
     'Remove product from stock': props<{ stockProductId: string }>(),
-    'Set product to local storage': props<{ stockProduct: StockModel[] }>(),
+    'Set product to local storage': props<{ stockProducts: StockModel[] }>(),
     'Save product to local storage': emptyProps(),
     'Clear local storage': emptyProps(),
     'Load products from local storage': emptyProps(),

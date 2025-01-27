@@ -7,11 +7,11 @@ export const ProductionReducer = createReducer(
   on(ProductionActions.addProductToStock, (state, action) => {
     return {
       ...state,
-      stockProduct: [...state.stockProduct, action.stockProduct],
+      stockProducts: [...state.stockProducts, action.stockProduct],
     };
   }),
-  on(ProductionActions.setProductToLocalStorage, (state, { stockProduct }) => {
-    return { ...state, stockProduct };
+  on(ProductionActions.setProductToLocalStorage, (state, { stockProducts }) => {
+    return { ...state, stockProducts };
   }),
   on(ProductionActions.clearLocalStorage, (state) => {
     return { ...state, stockProduct: [] };

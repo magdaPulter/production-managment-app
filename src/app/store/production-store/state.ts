@@ -2,18 +2,18 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { StockModel } from '../../models/stock.model';
 
 export interface ProductionState {
-  readonly stockProduct: StockModel[];
+  readonly stockProducts: StockModel[];
 }
 
 export namespace ProductionState {
   export const INIT_STATE: ProductionState = {
-    stockProduct: [],
+    stockProducts: [],
   };
-
   export const selectProductionState =
     createFeatureSelector<ProductionState>('production');
+
   export const selectStockProduct = createSelector(
     selectProductionState,
-    (state: ProductionState) => state.stockProduct
+    (state: ProductionState) => state.stockProducts
   );
 }
