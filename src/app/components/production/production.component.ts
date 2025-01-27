@@ -8,6 +8,8 @@ import { InventoryService } from '../../services/inventory.service';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { ProductionActions } from '../../store/production-store/actions';
+import { StockModel } from '../../models/stock.model';
+import { ProductionState } from '../../store/production-store/state';
 
 @Component({
   selector: 'app-production',
@@ -29,7 +31,17 @@ export class ProductionComponent implements OnInit {
 
   readonly store = inject(Store);
 
+  readonly productsInStock$: Observable<StockModel[]> = this.store.select(
+    ProductionState.selectStockProduct
+  );
+
+  constructor() {
+    this.productsInStock$.subscribe((val) => console.log(val));
+  }
+
   ngOnInit(): void {
-    this.store.dispatch(ProductionActions.loadProductsFromLocalStorage());
+    if (this.store.select(ProductionState.selectProductionState)) {
+      this.store.dispatch(ProductionActions.loadProductsFromLocalStorage());
+    }
   }
 }

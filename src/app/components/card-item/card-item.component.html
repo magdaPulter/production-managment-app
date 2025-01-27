@@ -1,13 +1,14 @@
+@if(item) {
 <mat-card appearance="outlined">
     <mat-card-header>
-        <mat-card-title>Shiba Inu</mat-card-title>
+        <mat-card-title>{{item.name}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <div class="ordered">
             <p>Ordered <span>23kg</span></p>
         </div>
         <div class="stock">
-            <p>In stock <span>23kg</span></p>
+            <p>In stock <span>{{item.weight}}kg</span></p>
         </div>
         <div class="stock">
             <p>Batches planned: <span>38</span></p>
@@ -20,3 +21,4 @@
         </div>
     </mat-card-content>
 </mat-card>
+}

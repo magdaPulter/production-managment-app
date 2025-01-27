@@ -1,8 +1,5 @@
 <div class="card-list">
-    <app-card-item></app-card-item>
-    <app-card-item></app-card-item>
-    <app-card-item></app-card-item>
-    <app-card-item></app-card-item>
-    <app-card-item></app-card-item>
-    <app-card-item></app-card-item>
+    @for(item of listItems; track item) {
+    <app-card-item [item]="item"></app-card-item>
+    }
 </div>

@@ -26,7 +26,6 @@ export class StockFormComponent {
     if (form.valid) {
       const id = this.stockItem.name.split(' ').join('');
       this.stockItem.id = id;
-      console.log(this.stockItem);
       this.store.dispatch(
         ProductionActions.addProductToStock({ stockProduct: this.stockItem })
       );
