@@ -19,8 +19,7 @@
         <ng-container cdkColumnDef={{displayedColumns[3]}}>
             <th cdk-header-cell *cdkHeaderCellDef> {{displayedColumns[3]}} </th>
             <td cdk-cell *cdkCellDef="let element">
-                <!-- {{element.orderId}} -->
-                @for(order of element.orderId; track order ){
+                @for(order of element.orderName; track order ){
                 {{order}}
                 }
             </td>

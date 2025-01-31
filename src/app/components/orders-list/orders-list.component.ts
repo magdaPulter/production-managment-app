@@ -12,9 +12,9 @@ import { OrderFormComponent } from '../order-form/order-form.component';
 import { ProductViewComponent } from '../product-view/product-view.component';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { ProductViewModel } from '../../viewModels/product.viewModel';
-import { ProductQueryModel } from '../../query-models/product.queryModel';
 import { TitleViewModel } from '../../viewModels/title.viewModel';
 import { CommonModule } from '@angular/common';
+import { ProductModel } from '../../models/product.model';
 
 @Component({
   selector: 'app-orders-list',
@@ -35,19 +35,12 @@ export class OrdersListComponent {
     signal(null);
   readonly toggleIcon: WritableSignal<boolean> = signal(true);
   @Input() listItems!: ListItemViewModel[];
-  @Input() listElements!: ProductQueryModel[] | null;
   @Input() titles!: TitleViewModel[];
   @Output() listElementDeleted: EventEmitter<ListItemViewModel> =
     new EventEmitter<ListItemViewModel>();
 
   @Output() listElementEdited: EventEmitter<ListItemViewModel> =
     new EventEmitter<ListItemViewModel>();
-
-  @Output() productAdded: EventEmitter<ProductViewModel> =
-    new EventEmitter<ProductViewModel>();
-
-  @Output() productDeleted: EventEmitter<ProductQueryModel> =
-    new EventEmitter<ProductQueryModel>();
 
   onElementRemoved(element: ListItemViewModel) {
     this.listElementDeleted.emit(element);
@@ -65,12 +58,30 @@ export class OrdersListComponent {
 
   onProductAdded(product: ProductViewModel, element: ListItemViewModel) {
     if (element.id) {
-      const newProduct = { ...product, orderId: element.id };
-      this.productAdded.emit(newProduct);
+      const productId: string = Math.floor(Math.random() * 1000).toString();
+      const productAdded = {
+        ...product,
+        orderName: element.name,
+        id: productId,
+      };
+      const elementWithProduct: ListItemViewModel = {
+        ...element,
+        products: [...element.products, productAdded],
+      };
+      this.listElementEdited.emit(elementWithProduct);
     }
   }
 
-  deleteEmitted(product: ProductQueryModel) {
-    this.productDeleted.emit(product);
+  onProductDeleted(product: ProductViewModel, listItem: ListItemViewModel) {
+    if (product.id) {
+      const removedIndex = listItem.products.findIndex(
+        (prod) => prod.id === product.id
+      );
+
+      const updatedProduct = [...listItem.products];
+      updatedProduct.splice(removedIndex, 1);
+      const elementWithouthProduct = { ...listItem, products: updatedProduct };
+      this.listElementEdited.emit(elementWithouthProduct);
+    }
   }
 }

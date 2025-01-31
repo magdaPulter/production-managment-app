@@ -11,11 +11,11 @@
                             Priority: {{listItem.priority}}
                         </mat-panel-description>
                     </mat-expansion-panel-header>
-                    <app-product-form [titles]="titles"
-                        (productEmitted)="onProductAdded($event, listItem)"></app-product-form>
+                    <app-product-form [titles]="titles" (productEmitted)="onProductAdded($event, listItem)">
+                    </app-product-form>
 
-                    <app-product-view [listItemId]="listItem.id" [items]="listElements"
-                        (itemDeleted)="deleteEmitted($event)"></app-product-view>
+                    <app-product-view [listItemId]="listItem.id" [items]="listItem.products"
+                        (itemDeleted)="onProductDeleted($event, listItem)"></app-product-view>
 
                 </mat-expansion-panel>
             </mat-accordion>

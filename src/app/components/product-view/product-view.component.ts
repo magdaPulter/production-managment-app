@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ProductQueryModel } from '../../query-models/product.queryModel';
+import { ProductViewModel } from '../../viewModels/product.viewModel';
 
 @Component({
   selector: 'app-product-view',
@@ -10,11 +10,11 @@ import { ProductQueryModel } from '../../query-models/product.queryModel';
 })
 export class ProductViewComponent {
   @Input() listItemId!: string | undefined;
-  @Input() items!: ProductQueryModel[] | null;
-  @Output() itemDeleted: EventEmitter<ProductQueryModel> =
-    new EventEmitter<ProductQueryModel>();
+  @Input() items!: ProductViewModel[] | null;
+  @Output() itemDeleted: EventEmitter<ProductViewModel> =
+    new EventEmitter<ProductViewModel>();
 
-  onElementRemoved(item: ProductQueryModel) {
+  onElementRemoved(item: ProductViewModel) {
     this.itemDeleted.emit(item);
   }
 }

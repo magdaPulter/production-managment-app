@@ -5,9 +5,7 @@
 
     @if(orders$ | async; as orders) {
     <app-orders-list [listItems]="orders" (listElementDeleted)="onSelected($event)"
-        (listElementEdited)="editOrder($event)" (productAdded)="createProduct($event)"
-        [listElements]="products$ | async" [titles]="(inventory$ | async)!"
-        (productDeleted)="onProductSelected($event)">
+        (listElementEdited)="editOrder($event)" [titles]="(inventory$ | async)!">
     </app-orders-list>
     }
 
@@ -15,11 +13,7 @@
         <app-delete-content [label]="'order'" (deleteEmitted)="deleteOrder(selectedOrder())"></app-delete-content>
     </app-modal>
 
-    <app-modal [id]="'deleteProductModal'">
-        <app-delete-content [label]="'product'" (deleteEmitted)="deleteProduct(selectedProduct())"></app-delete-content>
-    </app-modal>
-
-    @if(productSumWithTheSameNameWithOrdersName$ | async; as products) {
+    @if(products$ | async; as products) {
     <app-product-table [tableData]="products"></app-product-table>
     }
 </div>
