@@ -1,6 +1,6 @@
 export interface ProductQueryModel {
   readonly fullname: string;
   readonly quantity: number;
-  readonly orderId: string;
+  readonly orderName: string;
   readonly id?: string;
 }

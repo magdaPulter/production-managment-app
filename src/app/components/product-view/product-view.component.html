@@ -1,17 +1,13 @@
 <div class="list">
     <ul>
         @for(item of items; track item) {
-        @if(listItemId === item.orderId) {
         <li>
-            <p>{{item.quantity}} x {{item.fullname}} </p>
+            <p>{{item.quantity}} x {{item.value}}kg {{item.name}} </p>
             <div class="buttons">
-                <button ><i class="bi bi-pencil"></i></button>
-                <button data-bs-toggle="modal" data-bs-target="#deleteProductModal" (click)="onElementRemoved(item)"><i
-                        class="bi bi-trash3"></i></button>
+                <button><i class="bi bi-trash3" (click)="onElementRemoved(item)"></i></button>
             </div>
 
         </li>
-        }
         }
     </ul>
 </div>

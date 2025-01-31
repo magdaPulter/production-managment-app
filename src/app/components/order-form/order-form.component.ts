@@ -14,6 +14,7 @@ export class OrderFormComponent {
   @Input() listItem: ListItemViewModel = {
     name: '',
     priority: PriorityLevels.LOW,
+    products: [],
   };
   readonly priorityLevels: string[] = [
     PriorityLevels.LOW,
@@ -25,7 +26,7 @@ export class OrderFormComponent {
 
   onSubmit(form: NgForm) {
     if (form.valid) {
-      this.onSubmitted.emit(this.listItem);
+      this.onSubmitted.emit({ ...this.listItem, products: [] });
     }
   }
 }
