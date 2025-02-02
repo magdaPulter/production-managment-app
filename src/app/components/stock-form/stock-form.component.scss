@@ -28,11 +28,38 @@ form {
       @extend %form-error;
     }
   }
-  button {
-    @extend %form-btn;
+
+  .bottom {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    button {
+      @extend %form-btn;
+    }
+    button[disabled] {
+      border: 1px solid $color-secondary;
+      color: $color-secondary;
+    }
   }
-  button[disabled] {
-    border: 1px solid $color-secondary;
-    color: $color-secondary;
+}
+
+@media (max-width: 860px) {
+  form {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 510px) {
+  form {
+    .form-field {
+      select {
+        width: 100%;
+      }
+    }
+    .bottom {
+      button {
+        width: 100px;
+      }
+    }
   }
 }

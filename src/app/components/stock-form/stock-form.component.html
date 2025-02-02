@@ -10,13 +10,16 @@
         </select>
     </div>
 
-    <div class="form-field">
-        <label for="weight">Weight</label>
-        <input type="number" [(ngModel)]="stockItem.weight" name="weight" id="weight" required [min]="1"
-            #weight=ngModel>
-        @if(stockItem.weight < 1 && weight.touched){ <small class="error">weight should be a number higher than
-            1</small>
-            }
+    <div class="bottom">
+        <div class="form-field">
+            <label for="weight">Weight</label>
+            <input type="number" [(ngModel)]="stockItem.weight" name="weight" id="weight" required [min]="1"
+                #weight=ngModel>
+            @if(stockItem.weight < 1 && weight.touched){ <small class="error">weight should be a number higher than
+                1</small>
+                }
+        </div>
+        <button type="submit" [disabled]="form.invalid">Save</button>
     </div>
-    <button type="submit" [disabled]="form.invalid">Save</button>
+
 </form>
