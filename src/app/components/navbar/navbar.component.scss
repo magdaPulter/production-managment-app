@@ -46,7 +46,9 @@
     }
   }
 }
-
+button {
+  display: none;
+}
 @media (max-width: 1024px) {
   .nav {
     .list {
@@ -56,15 +58,8 @@
 }
 
 @media (max-width: 768px) {
-  .nav {
-    .list {
-      gap: 20px;
-    }
-  }
-}
-
-@media (max-width: 768px) {
   button {
+    display: block;
     @extend %btn-nav;
     i {
       color: $white;
