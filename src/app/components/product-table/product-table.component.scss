@@ -13,3 +13,23 @@
     width: 100%;
   }
 }
+
+@media (max-width: 1024px) {
+  .table {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .table {
+    table {
+      font-size: 14px;
+      th {
+        padding: 5px 5px;
+      }
+      td {
+        padding: 5px 5px;
+      }
+    }
+  }
+}

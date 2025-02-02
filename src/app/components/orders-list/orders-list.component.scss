@@ -44,3 +44,35 @@ h3 {
     }
   }
 }
+
+@media (max-width: 768px) {
+  .orders-list {
+    .list-item {
+      width: 100%;
+      .accordion {
+        mat-accordion {
+          padding: 10px;
+          mat-expansion-panel {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .orders-list {
+    .list-item {
+      width: 300px;
+      .accordion {
+        mat-accordion {
+          mat-expansion-panel {
+            width: 250px;
+            max-width: 250px;
+          }
+        }
+      }
+    }
+  }
+}
