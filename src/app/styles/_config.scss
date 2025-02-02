@@ -68,7 +68,7 @@ $grey: #4e4d4d;
   height: 30px;
 }
 
-@media (max-width: 320px) {
+@media (max-width: 768px) {
   %btn-nav {
     position: fixed;
     top: 20px;
