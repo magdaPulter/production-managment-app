@@ -7,20 +7,23 @@
             }
         </select>
     </div>
-    <div class="form-field">
-        <label for="value">Value</label>
-        <select [(ngModel)]="product.value" id="value" name="value" #value=ngModel>
-            @for(value of productValues; track value) {
-            <option [value]="value">{{value}}</option>
-            }
-        </select>
+    <div class="bottom">
+        <div class="form-field">
+            <label for="value">Value</label>
+            <select [(ngModel)]="product.value" id="value" name="value" #value=ngModel>
+                @for(value of productValues; track value) {
+                <option [value]="value">{{value}}</option>
+                }
+            </select>
+        </div>
+        <div class="form-field">
+            <label for="quantity">Quantity</label>
+            <input type="number" [(ngModel)]="product.quantity" name="quantity" id="quantity" required [min]="1"
+                #quantity=ngModel>
+        </div>
+        <button type="submit"><i class="bi bi-plus-circle"></i></button>
     </div>
-    <div class="form-field">
-        <label for="quantity">Quantity</label>
-        <input type="number" [(ngModel)]="product.quantity" name="quantity" id="quantity" required [min]="1"
-            #quantity=ngModel>
-    </div>
-    <button type="submit"><i class="bi bi-plus-circle"></i></button>
+
 </form>
 @if(product.quantity < 1 && quantity.touched) { <small class="error">weight should be a number higher than 1</small>
     }

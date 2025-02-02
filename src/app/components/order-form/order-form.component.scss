@@ -5,6 +5,20 @@
     display: flex;
     gap: 20px;
     align-items: center;
+
+    .bottom {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      button {
+        @extend %form-btn;
+      }
+      button[disabled] {
+        border: 1px solid $color-secondary;
+        color: $color-secondary;
+      }
+    }
     .form-field {
       @extend %form-ield;
       margin-top: 0px;
@@ -21,7 +35,6 @@
       select {
         @extend %input;
         color: $color-primary;
-        padding: 0px 10px;
         padding: 0px, 5px;
         width: 150px;
       }
@@ -29,12 +42,34 @@
         @extend %form-error;
       }
     }
-    button {
-      @extend %form-btn;
+  }
+}
+
+@media (max-width: 768px) {
+  .order-form {
+    form {
+      flex-direction: column;
     }
-    button[disabled] {
-      border: 1px solid $color-secondary;
-      color: $color-secondary;
+  }
+}
+
+@media (max-width: 425px) {
+  .order-form {
+    width: 310px;
+    form {
+      .form-field {
+        input {
+          width: 100%;
+        }
+        select {
+          width: 90px;
+        }
+      }
+      .bottom {
+        button {
+          width: 90px;
+        }
+      }
     }
   }
 }

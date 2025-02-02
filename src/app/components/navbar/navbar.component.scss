@@ -46,17 +46,20 @@
     }
   }
 }
-
-@media (max-width: 768px) {
+button {
+  display: none;
+}
+@media (max-width: 1024px) {
   .nav {
     .list {
-      gap: 20px;
+      gap: 30px;
     }
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 768px) {
   button {
+    display: block;
     @extend %btn-nav;
     i {
       color: $white;
