@@ -5,6 +5,7 @@ import { OrderModel } from '../models/order.model';
 import { ProductModel } from '../models/product.model';
 import { ProductQueryModel } from '../query-models/product.queryModel';
 import { ProductSumQueryModel } from '../query-models/product-sum.queryModel';
+import { ProductWithWeightQueryModel } from '../query-models/productWithWeight.queryModel';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +38,40 @@ export class OrderService {
             return prod.concat(acc);
           }, [])
       )
+    );
+  }
+  getAllProductsWithWeight(): Observable<ProductWithWeightQueryModel[]> {
+    return this.getAllProducts().pipe(
+      map((products) => {
+        return products.map((product) => {
+          return {
+            name: product.name.trim(),
+            weight: product.quantity * +product.value,
+          };
+        });
+      })
+    );
+  }
+
+  getAllProductsWithSumWeight(): Observable<ProductWithWeightQueryModel[]> {
+    return this.getAllProductsWithWeight().pipe(
+      map((products) => {
+        return Object.values(
+          products.reduce<Record<string, { name: string; weight: number }>>(
+            (acc, prod) => {
+              if (!acc[prod.name]) {
+                acc[prod.name] = {
+                  name: prod.name,
+                  weight: 0,
+                };
+              }
+              acc[prod.name].weight += prod.weight;
+              return acc;
+            },
+            {}
+          )
+        );
+      })
     );
   }
 

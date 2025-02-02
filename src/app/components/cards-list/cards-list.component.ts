@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CardItemComponent } from '../card-item/card-item.component';
-import { StockViewModel } from '../../viewModels/stock.viewModel';
+import { InventoryViewModel } from '../../viewModels/inventory.viewModel';
 
 @Component({
   selector: 'app-cards-list',
@@ -10,5 +10,5 @@ import { StockViewModel } from '../../viewModels/stock.viewModel';
   styleUrl: './cards-list.component.scss',
 })
 export class CardsListComponent {
-  @Input() listItems!: StockViewModel[];
+  @Input() listItems!: InventoryViewModel[];
 }
