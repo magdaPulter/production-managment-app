@@ -10,6 +10,8 @@ import { Store } from '@ngrx/store';
 import { ProductionActions } from '../../store/production-store/actions';
 import { StockModel } from '../../models/stock.model';
 import { ProductionState } from '../../store/production-store/state';
+import { OrderService } from '../../services/order.service';
+import { ProductWithWeightQueryModel } from '../../query-models/productWithWeight.queryModel';
 
 @Component({
   selector: 'app-production',
@@ -25,19 +27,19 @@ import { ProductionState } from '../../store/production-store/state';
 })
 export class ProductionComponent implements OnInit {
   readonly inventoryService = inject(InventoryService);
+  readonly orderService = inject(OrderService);
 
   readonly inventory$: Observable<InventoryModel[]> =
     this.inventoryService.getInventory();
+
+  readonly products$: Observable<ProductWithWeightQueryModel[]> =
+    this.orderService.getAllProductsWithSumWeight();
 
   readonly store = inject(Store);
 
   readonly productsInStock$: Observable<StockModel[]> = this.store.select(
     ProductionState.selectStockProduct
   );
-
-  constructor() {
-    this.productsInStock$.subscribe((val) => console.log(val));
-  }
 
   ngOnInit(): void {
     if (this.store.select(ProductionState.selectProductionState)) {

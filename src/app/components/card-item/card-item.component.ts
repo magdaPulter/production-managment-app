@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { StockViewModel } from '../../viewModels/stock.viewModel';
 import { FormsModule } from '@angular/forms';
+import { InventoryViewModel } from '../../viewModels/inventory.viewModel';
 
 @Component({
   selector: 'app-card-item',
@@ -11,6 +11,6 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './card-item.component.scss',
 })
 export class CardItemComponent {
-  @Input() item!: StockViewModel;
+  @Input() item!: InventoryViewModel;
   roasted: number = 0;
 }
