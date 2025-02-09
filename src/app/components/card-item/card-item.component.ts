@@ -1,7 +1,7 @@
 import { Component, Input, signal, WritableSignal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
-import { ProductionsItemCounted } from '../../models/productionsItem.model';
+import { ProductionsItemSummary } from '../../models/productionsItem.model';
 
 @Component({
   selector: 'app-card-item',
@@ -11,7 +11,7 @@ import { ProductionsItemCounted } from '../../models/productionsItem.model';
   styleUrl: './card-item.component.scss',
 })
 export class CardItemComponent {
-  @Input() item!: ProductionsItemCounted;
+  @Input() item!: ProductionsItemSummary;
   roasted: number = 0;
   editMode: WritableSignal<boolean> = signal(false);
 

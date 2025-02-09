@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { StockComponent } from '../stock/stock.component';
 import { CardsListComponent } from '../cards-list/cards-list.component';
 import { ProductionSummaryComponent } from '../production-summary/production-summary.component';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, tap } from 'rxjs';
 import { InventoryModel } from '../../models/inventory.model';
 import { InventoryService } from '../../services/inventory.service';
 import { CommonModule } from '@angular/common';
@@ -14,8 +14,9 @@ import { OrderService } from '../../services/order.service';
 import { ProductWithWeightQueryModel } from '../../query-models/productWithWeight.queryModel';
 import {
   ProductionsItem,
-  ProductionsItemCounted,
+  ProductionsItemSummary,
 } from '../../models/productionsItem.model';
+import { ProductionItemsAction } from '../../store/productionItems-store/actions';
 
 @Component({
   selector: 'app-production',
@@ -66,7 +67,7 @@ export class ProductionComponent implements OnInit {
     })
   );
 
-  readonly productionsItemConted$: Observable<ProductionsItemCounted[]> =
+  readonly productionsItemConted$: Observable<ProductionsItemSummary[]> =
     this.productionsItem$.pipe(
       map((items) =>
         items.map((item) => {
@@ -87,6 +88,18 @@ export class ProductionComponent implements OnInit {
     );
 
   ngOnInit(): void {
+    this.productionsItemConted$
+      .pipe(
+        tap((productionItems) => {
+          this.store.dispatch(
+            ProductionItemsAction.setProductionItems({
+              productionItems,
+            })
+          );
+        })
+      )
+      .subscribe();
+
     if (this.store.select(ProductionState.selectProductionState)) {
       this.store.dispatch(ProductionActions.loadProductsFromLocalStorage());
     }

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CardItemComponent } from '../card-item/card-item.component';
-import { ProductionsItemCounted } from '../../models/productionsItem.model';
+import { ProductionsItemSummary } from '../../models/productionsItem.model';
 
 @Component({
   selector: 'app-cards-list',
@@ -10,5 +10,5 @@ import { ProductionsItemCounted } from '../../models/productionsItem.model';
   styleUrl: './cards-list.component.scss',
 })
 export class CardsListComponent {
-  @Input() productionsItems!: ProductionsItemCounted[];
+  @Input() productionsItems!: ProductionsItemSummary[];
 }

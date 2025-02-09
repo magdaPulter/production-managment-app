@@ -5,7 +5,7 @@ export interface ProductionsItem {
   readonly batchLost: number;
 }
 
-export interface ProductionsItemCounted extends ProductionsItem {
+export interface ProductionsItemSummary extends ProductionsItem {
   readonly planned: number;
   readonly roasted: number;
   readonly left: number;
