@@ -15,6 +15,15 @@
                 1</small>
                 }
         </div>
+        <div class="form-field">
+            <label for="weight">Weight of Roasted</label>
+            <input type="number" [(ngModel)]="inventory.batchLost" name="batchLost" id="batchLost" required [min]="1"
+                #batchLost=ngModel>
+            @if(inventory.batchLost < 1 && batchLost.touched){ <small class="error">weight should be a number higher
+                than
+                1</small>
+                }
+        </div>
     </div>
 
     <div class="submit">

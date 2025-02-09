@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal, WritableSignal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
-import { InventoryViewModel } from '../../viewModels/inventory.viewModel';
+import { ProductionsItemCounted } from '../../models/productionsItem.model';
 
 @Component({
   selector: 'app-card-item',
@@ -11,6 +11,16 @@ import { InventoryViewModel } from '../../viewModels/inventory.viewModel';
   styleUrl: './card-item.component.scss',
 })
 export class CardItemComponent {
-  @Input() item!: InventoryViewModel;
+  @Input() item!: ProductionsItemCounted;
   roasted: number = 0;
+  editMode: WritableSignal<boolean> = signal(false);
+
+  onEditMode() {
+    this.editMode.update((isEdited) => !isEdited);
+    this.item = {
+      ...this.item,
+      roasted: this.roasted,
+      left: this.item.planned - this.roasted,
+    };
+  }
 }

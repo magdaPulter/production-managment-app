@@ -14,6 +14,7 @@ export class InventoryFormComponent {
   @Input() inventory: InventoryViewModel = {
     name: '',
     weight: 0,
+    batchLost: 0,
   };
 
   @Output() onFormSubmitted: EventEmitter<InventoryViewModel> =
@@ -21,7 +22,12 @@ export class InventoryFormComponent {
 
   onSubmit(form: NgForm) {
     if (form.valid) {
-      this.onFormSubmitted.emit(this.inventory);
+      const inventory = {
+        name: this.inventory.name.trim(),
+        weight: this.inventory.weight,
+        batchLost: this.inventory.batchLost,
+      };
+      this.onFormSubmitted.emit(inventory);
     }
   }
 }

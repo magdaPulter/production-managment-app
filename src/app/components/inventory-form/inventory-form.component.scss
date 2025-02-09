@@ -12,7 +12,7 @@ form {
   }
   .bottom-fields {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
   }
   .form-field {
     font-family: $main-font;
@@ -55,6 +55,9 @@ form {
     width: 250px;
     margin: 0px;
 
+    .bottom-fields {
+      flex-direction: column;
+    }
     .form-field {
       label {
         margin-left: 0px;
