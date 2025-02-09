@@ -27,6 +27,7 @@ export class InventoryComponent {
   readonly inventory: WritableSignal<InventoryModel> = signal({
     name: '',
     weight: 0,
+    batchLost: 0,
   });
 
   readonly selectedInventory: WritableSignal<InventoryModel> = signal(

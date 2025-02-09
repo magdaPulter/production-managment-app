@@ -5,22 +5,35 @@
     </mat-card-header>
     <mat-card-content>
         <div class="ordered">
-            <p>Ordered <span>..kg</span></p>
+            @if(item.orderedWeight) {
+            <p>Ordered: {{item.orderedWeight}}kg</p>
+            } @else {
+            <p>Ordered: 0kg</p>
+            }
         </div>
         <div class="stock">
-            <p>In stock <span>{{item.weight}}kg</span></p>
+            @if(item.inStockWeight) {
+            <p>In Stock: {{item.inStockWeight}}kg</p>
+            } @else {
+            <p>In Stock: 0kg</p>
+            }
         </div>
         <div class="stock">
-            <p>Batches planned: <span> ...</span></p>
+            <p>Batches planned: <span> {{item.planned}}</span></p>
         </div>
         <div>
             <div class="form-field">
-                <label for="quantity">Already roasted:</label>
+                <label for="quantity">Already roasted: </label>
+                @if(!editMode()) {
+                <p>{{item.roasted}}</p> <button (click)="onEditMode()"><i class="bi bi-pencil"></i></button>
+                } @else {
                 <input type="number" [(ngModel)]="roasted" name="quantity" id="quantity">
+                <button (click)="onEditMode()"> <i class="bi bi-check-lg"></i></button>
+                }
             </div>
         </div>
         <div class="stock">
-            <p>Batches left: <span>...</span></p>
+            <p>Batches left: <span>{{item.left}}</span></p>
         </div>
     </mat-card-content>
 </mat-card>

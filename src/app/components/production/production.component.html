@@ -1,8 +1,9 @@
 @if(inventory$ | async; as inventoryList) {
 <app-stock [inventory]="inventoryList"></app-stock>
 }
-@if(inventory$ | async; as inventoryList) {
-<app-cards-list [listItems]="inventoryList"></app-cards-list>
+
+@if(productionsItemConted$ | async; as productionsItem) {
+<app-cards-list [productionsItems]="productionsItem"></app-cards-list>
 }
 
 <app-production-summary></app-production-summary>

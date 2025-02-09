@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { StockComponent } from '../stock/stock.component';
 import { CardsListComponent } from '../cards-list/cards-list.component';
 import { ProductionSummaryComponent } from '../production-summary/production-summary.component';
-import { Observable } from 'rxjs';
+import { combineLatest, map, Observable, tap } from 'rxjs';
 import { InventoryModel } from '../../models/inventory.model';
 import { InventoryService } from '../../services/inventory.service';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,11 @@ import { StockModel } from '../../models/stock.model';
 import { ProductionState } from '../../store/production-store/state';
 import { OrderService } from '../../services/order.service';
 import { ProductWithWeightQueryModel } from '../../query-models/productWithWeight.queryModel';
+import {
+  ProductionsItem,
+  ProductionsItemSummary,
+} from '../../models/productionsItem.model';
+import { ProductionItemsAction } from '../../store/productionItems-store/actions';
 
 @Component({
   selector: 'app-production',
@@ -32,7 +37,7 @@ export class ProductionComponent implements OnInit {
   readonly inventory$: Observable<InventoryModel[]> =
     this.inventoryService.getInventory();
 
-  readonly products$: Observable<ProductWithWeightQueryModel[]> =
+  readonly orderedProducts$: Observable<ProductWithWeightQueryModel[]> =
     this.orderService.getAllProductsWithSumWeight();
 
   readonly store = inject(Store);
@@ -41,7 +46,60 @@ export class ProductionComponent implements OnInit {
     ProductionState.selectStockProduct
   );
 
+  readonly productionsItem$: Observable<ProductionsItem[]> = combineLatest([
+    this.orderedProducts$,
+    this.inventory$,
+    this.productsInStock$,
+  ]).pipe(
+    map(([orderedProducts, inventory, productsInStock]) => {
+      const orderMap = new Map(
+        orderedProducts.map((ordered) => [ordered.name, ordered.weight])
+      );
+      const stockMap = new Map(
+        productsInStock.map((inStock) => [inStock.name, inStock.weight])
+      );
+      return inventory.map((inventory) => ({
+        name: inventory.name,
+        orderedWeight: orderMap.get(inventory.name) ?? 0,
+        inStockWeight: stockMap.get(inventory.name) ?? 0,
+        batchLost: inventory.batchLost,
+      }));
+    })
+  );
+
+  readonly productionsItemConted$: Observable<ProductionsItemSummary[]> =
+    this.productionsItem$.pipe(
+      map((items) =>
+        items.map((item) => {
+          const planned = Math.ceil(
+            item.orderedWeight / item.batchLost - item.inStockWeight
+          );
+          return {
+            name: item.name,
+            orderedWeight: item.orderedWeight,
+            inStockWeight: item.inStockWeight,
+            batchLost: item.batchLost,
+            planned: item.orderedWeight === 0 ? 0 : planned,
+            roasted: 0,
+            left: 0,
+          };
+        })
+      )
+    );
+
   ngOnInit(): void {
+    this.productionsItemConted$
+      .pipe(
+        tap((productionItems) => {
+          this.store.dispatch(
+            ProductionItemsAction.setProductionItems({
+              productionItems,
+            })
+          );
+        })
+      )
+      .subscribe();
+
     if (this.store.select(ProductionState.selectProductionState)) {
       this.store.dispatch(ProductionActions.loadProductsFromLocalStorage());
     }

@@ -5,6 +5,16 @@ mat-card {
     margin-top: 20px;
 
     .form-field {
+      display: flex;
+      height: 30px;
+      p {
+        margin-left: 5px;
+      }
+      button {
+        margin-left: 10px;
+        border: none;
+        background-color: inherit;
+      }
       input {
         width: 50px;
         padding: 0px 5px;
